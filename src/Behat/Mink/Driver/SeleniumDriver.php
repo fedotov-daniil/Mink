@@ -9,7 +9,8 @@ use Behat\Mink\Session,
 
 use Selenium\Client as SeleniumClient,
     Selenium\Locator as SeleniumLocator,
-    Selenium\Exception as SeleniumException;
+    Selenium\Exception as SeleniumException,
+    Selenium\Browser;
 
 /*
  * This file is part of the Behat\Mink.
@@ -87,6 +88,15 @@ class SeleniumDriver implements DriverInterface
     public function setSession(Session $session)
     {
         $this->session = $session;
+    }
+
+    /**
+     * @see Behat\Mink\Driver\DriverInterface::setSpeed()
+     */
+    public function setSpeed($speed){
+        $old_speed = $this->browser->getSpeed();
+        $this->browser->setSpeed($speed);
+        return $old_speed;
     }
 
     /**

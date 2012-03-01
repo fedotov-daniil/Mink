@@ -595,4 +595,17 @@ JS;
 
         return $string;
     }
+
+    /**
+     *
+     * Sets driver's exec speed
+     *
+     * @param int $speed
+     * @return int
+     */
+    function setSpeed($speed)
+    {
+        $this->client->setSpeed($speed);
+        return $speed;
+    }
 }

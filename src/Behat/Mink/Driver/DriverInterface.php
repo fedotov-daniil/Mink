@@ -27,6 +27,15 @@ interface DriverInterface
     function setSession(Session $session);
 
     /**
+     *
+     * Sets driver's exec speed
+     *
+     * @param int $speed
+     * @return int
+     */
+    function setSpeed($speed);
+
+    /**
      * Starts driver.
      */
     function start();

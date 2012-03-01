@@ -660,4 +660,16 @@ class GoutteDriver implements DriverInterface
 
         return $crawler;
     }
+
+    /**
+     *
+     * Sets driver's exec speed
+     *
+     * @param int $speed
+     * @return int
+     */
+    function setSpeed($speed)
+    {
+        return $speed;
+    }
 }
