@@ -608,4 +608,9 @@ JS;
         $this->client->setSpeed($speed);
         return $speed;
     }
+
+    function capturePageScreenshot($fileName, $args = null)
+    {
+        // TODO: Implement capturePageScreenshot() method.
+    }
 }

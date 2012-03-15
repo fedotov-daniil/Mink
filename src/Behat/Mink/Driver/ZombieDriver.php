@@ -757,5 +757,10 @@ JS;
     {
         return $speed;
     }
+
+    function capturePageScreenshot($fileName, $args = null)
+    {
+        // TODO: Implement capturePageScreenshot() method.
+    }
 }
 

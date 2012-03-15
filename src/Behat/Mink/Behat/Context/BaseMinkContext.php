@@ -14,6 +14,9 @@ use Behat\Mink\Exception\ElementNotFoundException,
     Behat\Mink\Exception\ElementHtmlException,
     Behat\Mink\Exception\ElementTextException;
 
+use Behat\Mink\Session,
+    Behat\Mink\Mink;
+
 require_once 'PHPUnit/Autoload.php';
 require_once 'PHPUnit/Framework/Assert/Functions.php';
 
@@ -175,6 +178,7 @@ abstract class BaseMinkContext extends BehatContext implements TranslatedContext
      * Fills in form field with specified id|name|label|value.
      *
      * @When /^(?:|I )fill in "(?P<field>(?:[^"]|\\")*)" with "(?P<value>(?:[^"]|\\")*)"$/
+     * @When /^(?:|I )fill in "(?P<field>(?:[^"]|\\")*)" with (?P<value>(?:\d+)*)$/
      * @When /^(?:|I )fill in "(?P<value>(?:[^"]|\\")*)" for "(?P<field>(?:[^"]|\\")*)"$/
      */
     public function fillField($field, $value)
@@ -334,7 +338,8 @@ abstract class BaseMinkContext extends BehatContext implements TranslatedContext
     {
         $expected = str_replace('\\"', '"', $text);
         $actual   = $this->getSession()->getPage()->getText();
-
+        if ($text == '')
+            return;
         try {
             assertContains($expected, $actual);
         } catch (AssertException $e) {

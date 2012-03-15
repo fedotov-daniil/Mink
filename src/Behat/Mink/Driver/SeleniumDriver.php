@@ -99,6 +99,10 @@ class SeleniumDriver implements DriverInterface
         return $old_speed;
     }
 
+    public function capturePageScreenshot($fileName, $args = null){
+        return $this->browser->captureEntirePageScreenshot($fileName, $args);
+    }
+
     /**
      * @see Behat\Mink\Driver\DriverInterface::start()
      */
@@ -390,7 +394,19 @@ JS;
      */
     public function setValue($xpath, $value)
     {
-        $this->browser->type(SeleniumLocator::xpath($xpath), $value);
+        $path = SeleniumLocator::xpath($xpath);
+        if (!empty($value)){
+            $typePart = substr($value, 0, -1);
+            $typeKeysPart = substr($value, -1);
+        }
+        else{
+            $typePart = $typeKeysPart = '';
+        }
+
+        $this->browser->type($path, $typePart);
+        $this->focus($path);
+        $this->browser->typeKeys($path,$typeKeysPart);
+        $this->blur($path);
     }
 
     /**
@@ -507,7 +523,7 @@ JS;
      */
     public function focus($xpath)
     {
-        throw new UnsupportedDriverActionException('Focus is not supported by %s', $this);
+        $this->browser->focus($xpath);
     }
 
     /**
@@ -517,7 +533,7 @@ JS;
      */
     public function blur($xpath)
     {
-        throw new UnsupportedDriverActionException('Blur is not supported by %s', $this);
+        $this->browser->fireEvent($xpath, 'blur');
     }
 
     /**

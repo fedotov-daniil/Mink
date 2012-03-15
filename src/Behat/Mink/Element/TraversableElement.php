@@ -17,6 +17,8 @@ use Behat\Mink\Exception\ElementNotFoundException;
  *
  * @author      Konstantin Kudryashov <ever.zet@gmail.com>
  */
+use Behat\Mink\Element\NodeElement;
+
 abstract class TraversableElement extends Element
 {
     /**

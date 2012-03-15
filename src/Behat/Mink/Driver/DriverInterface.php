@@ -351,4 +351,6 @@ interface DriverInterface
      * @param   string  $condition  JS condition
      */
     function wait($time, $condition);
+
+    function capturePageScreenshot($fileName, $args = null);
 }
